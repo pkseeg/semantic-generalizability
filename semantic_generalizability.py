@@ -3,12 +3,12 @@ from model import read_olmo
 from embed import embed
 
 
-def main(dev = False):
+def main(a_name, b_name, c_name, dev = False):
     # Experiment steps
     if dev:
-        a, b, c = read_example_data("example_data/kindle_subset", "example_data/books_subset", "example_data/fashion_subset")
+        a, b, c = read_example_data(a_name, b_name, c_name) #"example_data/kindle_subset", "example_data/books_subset", "example_data/fashion_subset"
     else:
-        a, b, c = read_classification_data("raw_review_Kindle_Store", "raw_review_Books", "raw_review_Amazon_Fashion")
+        a, b, c = read_classification_data(a_name, b_name, c_name) #"raw_review_Kindle_Store", "raw_review_Books", "raw_review_Amazon_Fashion"
     olmo_model, olmo_tokenizer = read_olmo()
 
     # 1. measure distance between A, B and A, C using M embedding strategy
