@@ -14,12 +14,12 @@ class BaseModel:
 
         outputs = self.model.generate(
             inputs["input_ids"], 
-            max_length=512,
+            max_new_tokens=512,
             num_return_sequences=1, 
             do_sample=True,
             temperature=1.0
         )
-        
+
         decoded_output = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
         return decoded_output
