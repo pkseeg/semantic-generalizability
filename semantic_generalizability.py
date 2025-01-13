@@ -20,6 +20,7 @@ def main(a_name, b_name, c_name, dev = False):
     dist = depth(a_, b_)
     print(dist)
     dist = depth(a_, c_)
+    print(dist)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
 
