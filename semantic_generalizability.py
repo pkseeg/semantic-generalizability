@@ -2,6 +2,7 @@ from data import read_classification_data, read_example_data
 from model import read_olmo, read_qwen3b, read_qwen05b
 from embed import embed
 from measure import depth
+from specialize.ICL import ICL
 
 
 def main(a_name, b_name, c_name, dev = False):
@@ -14,15 +15,18 @@ def main(a_name, b_name, c_name, dev = False):
         model, tokenizer = read_olmo()
 
     # 1. measure distance between A, B and A, C using M embedding strategy
-    a_ = embed(a, model, tokenizer)
-    b_ = embed(b, model, tokenizer)
-    c_ = embed(c, model, tokenizer)
-    dist = depth(a_, b_)
-    print(dist)
-    dist = depth(a_, c_)
-    print(dist)
+    #a_ = embed(a, model, tokenizer)
+    #b_ = embed(b, model, tokenizer)
+    #c_ = embed(c, model, tokenizer)
+    #dist = depth(a_, b_)
+    #print(dist)
+    #dist = depth(a_, c_)
+    #print(dist)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
+    icl = ICL(model)
+    icl.specialize(a)
+    icl.predict_classification(b)
 
     # 3. evaluate M_A on B and C
 
