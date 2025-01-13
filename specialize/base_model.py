@@ -1,5 +1,5 @@
 class BaseModel:
-    def __init__(self):
+    def __init__(self, model):
         pass
 
     def specialize(self, a):
