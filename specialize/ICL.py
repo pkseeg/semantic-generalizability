@@ -74,10 +74,7 @@ class ICLModel(BaseModel):
         ytrues = []
         yhats = []
         for i in trange(0, len(b), batch_size):
-            samples = b[i: i + batch_size]
-            print(samples)
-            print(samples[0])
-            assert False
+            samples = b.select(range(i, min(i + batch_size, len(b))))
             prompts = [self.format_prompt(sample) for sample in samples]
             decoded_outputs = self.model_out(prompts)
             yhat = [self.format_out(output) for output in decoded_outputs]
