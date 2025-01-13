@@ -13,7 +13,7 @@ class BaseModel:
         pass
 
     def model_out(self, prompt):
-        inputs = self.tokenizer(prompt, return_tensors="pt").to(self.model.device)
+        inputs = self.tokenizer(prompt, return_tensors="pt", padding=True, truncation=True).to(self.model.device)
 
         outputs = self.model.generate(
             inputs["input_ids"], 
