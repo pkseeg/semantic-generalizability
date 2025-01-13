@@ -3,7 +3,7 @@ from specialize.base_model import BaseModel
 
 class ICL(BaseModel):
     def __init__(self, model):
-        self.__init__(super)
+        #self.__init__(super)
         self.model = model
         self.prompt = self.get_prompt()
     
