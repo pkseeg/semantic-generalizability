@@ -6,7 +6,7 @@ class ICLModel(BaseModel):
         super(ICLModel, self).__init__(model)
         self.prompt = self.get_prompt()
     
-    def get_prommpt(self):
+    def get_prompt(self):
         prompt = '''Give the star rating (1-5) of the following reviews.
 
         Review: {example_0}
