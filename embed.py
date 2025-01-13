@@ -9,8 +9,7 @@ def embed(ds, model, tokenizer):
             text, 
             padding=True, 
             truncation=True, 
-            return_tensors="pt", 
-            max_length=512
+            return_tensors="pt"
         )
         # Move inputs to the same device as the model
         inputs = {key: value.to(model.device) for key, value in inputs.items()}
@@ -21,7 +20,7 @@ def embed(ds, model, tokenizer):
         return {"embedding": embedding}
     
     # Apply the embedding logic to the dataset
-    return ds.map(process_example, batched=True) # FIXME batch size?
+    return ds.map(process_example, batched=True, batch_size=4) # FIXME batch size?
 
 # Function to compute mean pooling from the model's hidden states
 def mean_pooling(hidden_states, attention_mask):
