@@ -1,5 +1,5 @@
 from specialize.base_model import BaseModel
-from tqdm.auto import tqdm
+from tqdm.auto import trange
 
 
 class ICLModel(BaseModel):
@@ -70,15 +70,16 @@ class ICLModel(BaseModel):
         return 5
         
     
-    def predict_classification(self, b):
+    def predict_classification(self, b, batch_size = 32):
         ytrues = []
         yhats = []
-        for sample in tqdm(b):
-            prompt = self.format_prompt(sample)
-            output = self.model_out(prompt)
-            yhat = self.format_out(output)
-            ytrues.append(sample["label"])
-            yhats.append(yhat)
+        for i in trange(0, len(b), batch_size):
+            samples = [b[i: i + batch_size]]
+            prompts = [self.format_prompt(sample) for sample in samples]
+            decoded_outputs = self.model_out(prompts)
+            yhat = [self.format_out(output) for output in decoded_outputs]
+            ytrues.extend([sample["label"] for sample in samples])
+            yhats.extend(yhat)
         return ytrues, yhats
 
 

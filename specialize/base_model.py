@@ -23,6 +23,6 @@ class BaseModel:
             temperature=1.0
         )
 
-        decoded_output = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        decoded_outputs = [self.tokenizer.decode(output, skip_special_tokens=True) for output in outputs]
 
-        return decoded_output
+        return decoded_outputs
