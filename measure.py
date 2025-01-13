@@ -11,18 +11,14 @@ def depth(a_, b_, batch_size = 32):
     a_ = torch.tensor(a_["embedding"]).float()
     b_ = torch.tensor(b_["embedding"]).float()
 
-    
     a_ = a_.to(device)
     b_ = b_.to(device)
 
     similarities = []
     for i in range(0, len(a_), batch_size):
         a_batch = a_[i : i + batch_size]
-        print(a_batch.shape)
-        print(b_.shape)
-        assert False
         sim = F.cosine_similarity(
-            a_batch.unsqueeze(1), b_.unsqueeze(0), dim=-1
+            a_batch, b_, dim=-1
         )  
         similarities.append(sim.mean(dim=1).cpu())
     
