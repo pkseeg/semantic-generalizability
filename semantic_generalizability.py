@@ -2,7 +2,7 @@ from data import read_classification_data, read_example_data
 from model import read_olmo, read_qwen3b, read_qwen05b
 from embed import embed
 from measure import depth
-from specialize import ICLModel
+from specialize.ICL import ICLModel
 
 
 def main(a_name, b_name, c_name, dev = False):
