@@ -1,4 +1,4 @@
-from base_model import BaseModel
+from specialize.base_model import BaseModel
 
 
 class ICL(BaseModel):
