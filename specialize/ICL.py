@@ -29,23 +29,23 @@ class ICLModel(BaseModel):
         '''
         return prompt
 
-    def format_prompt(self, y):
+    def format_prompt(self, sample):
         example_0 = self.examples["text"][0]
-        label_0 = self.examples["label"][0]
+        label_0 = str(int(self.examples["label"][0]))
 
         example_1 = self.examples["text"][1]
-        label_1 = self.examples["label"][1]
+        label_1 = str(int(self.examples["label"][1]))
 
         example_2 = self.examples["text"][2]
-        label_2 = self.examples["label"][2]
+        label_2 = str(int(self.examples["label"][2]))
 
         example_3 = self.examples["text"][3]
-        label_3 = self.examples["label"][3]
+        label_3 = str(int(self.examples["label"][3]))
 
         example_4 = self.examples["text"][4]
-        label_4 = self.examples["label"][4]
+        label_4 = str(int(self.examples["label"][4]))
 
-        text = y
+        text = sample["text"]
 
         return self.prompt.format(example_0=example_0, label_0=label_0, example_1=example_1, label_1=label_1, example_2=example_2, label_2=label_2, example_3=example_3, label_3=label_3, example_4=example_4, label_4=label_4, text=text)
 
