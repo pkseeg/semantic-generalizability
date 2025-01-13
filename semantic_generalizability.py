@@ -17,6 +17,7 @@ def main(a_name, b_name, c_name, dev = False):
     a_ = embed(a, model, tokenizer)
     b_ = embed(b, model, tokenizer)
     dist = depth(a_, b_)
+    print(dist)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
 
