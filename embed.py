@@ -11,7 +11,7 @@ def embed(ds, model, tokenizer):
         )
         inputs = {key: value.to(model.device) for key, value in inputs.items()}
         with torch.no_grad():
-            outputs = model(**inputs)
+            outputs = model(**inputs, output_hidden_states=True)
         embedding = mean_pooling(outputs.last_hidden_state, inputs["attention_mask"])
         embedding = embedding.cpu()
         return {"embedding": embedding} # FIXME should I take it off the GPU here? I don't need them on the GPU at all times... I am running out of GPU RAM
