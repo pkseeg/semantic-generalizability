@@ -2,8 +2,8 @@ from specialize.base_model import BaseModel
 
 
 class ICLModel(BaseModel):
-    def __init__(self, model):
-        super(ICLModel, self).__init__(model)
+    def __init__(self, model, tokenizer):
+        super(ICLModel, self).__init__(model, tokenizer)
         self.prompt = self.get_prompt()
     
     def get_prompt(self):
@@ -57,10 +57,30 @@ class ICLModel(BaseModel):
     def specialize(self, a):
         self.examples = self.select_random(a)
     
+    def format_out(self, output):
+        if "1" in output:
+            return 1
+        elif "2" in output:
+            return 2
+        elif "3" in output:
+            return 3
+        elif "4" in output:
+            return 4
+        return 5
+        
+    
     def predict_classification(self, b):
+        ytrues = []
+        yhats = []
         for sample in b:
             prompt = self.format_prompt(sample)
-            print(sample)
-            print(prompt)
-            assert False
+            output = self.model_out(prompt)
+            yhat = self.format_out(output)
+            ytrues.append(sample["label"])
+            yhats.append(yhat)
+        return ytrues, yhats
+
+
+
+            
         
