@@ -47,7 +47,7 @@ class ICLModel(BaseModel):
 
         text = y
 
-        return self.prompt.format(example_0, label_0, example_1, label_1, example_2, label_2, example_3, label_3, example_4, label_4, text)
+        return self.prompt.format(example_0=example_0, label_0=label_0, example_1=example_1, label_1=label_1, example_2=example_2, label_2=label_2, example_3=example_3, label_3=label_3, example_4=example_4, label_4=label_4, text=text)
 
     
     def select_random(self, a, k = 5):
