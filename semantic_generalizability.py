@@ -16,8 +16,10 @@ def main(a_name, b_name, c_name, dev = False):
     # 1. measure distance between A, B and A, C using M embedding strategy
     a_ = embed(a, model, tokenizer)
     b_ = embed(b, model, tokenizer)
+    c_ = embed(c, model, tokenizer)
     dist = depth(a_, b_)
     print(dist)
+    dist = depth(a_, c_)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
 
