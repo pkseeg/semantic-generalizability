@@ -6,7 +6,7 @@ from embed import embed
 def main(dev = False):
     # Experiment steps
     if dev:
-        a, b, c = read_example_data("kindle_store_subset", "books_subset", "amazon_fashion_subset")
+        a, b, c = read_example_data("example_data/kindle_store_subset", "example_data/books_subset", "example_data/amazon_fashion_subset")
     else:
         a, b, c = read_classification_data("raw_review_Kindle_Store", "raw_review_Books", "raw_review_Amazon_Fashion")
     olmo_model, olmo_tokenizer = read_olmo()
