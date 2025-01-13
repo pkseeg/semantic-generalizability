@@ -1,6 +1,6 @@
 class BaseModel:
     def __init__(self, model):
-        pass
+        self.model = model
 
     def specialize(self, a):
         pass
