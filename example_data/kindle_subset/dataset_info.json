@@ -1,0 +1,68 @@
+{
+  "builder_name": "amazon-reviews-2023",
+  "citation": "",
+  "config_name": "raw_review_Kindle_Store",
+  "dataset_size": 12480307943,
+  "description": "Amazon Review 2023 is an updated version of the Amazon Review 2018 dataset.\nThis dataset mainly includes reviews (ratings, text) and item metadata (desc-\nriptions, category information, price, brand, and images). Compared to the pre-\nvious versions, the 2023 version features larger size, newer reviews (up to Sep\n2023), richer and cleaner meta data, and finer-grained timestamps (from day to \nmilli-second).\n\nThis is a subset for reviews in domain: Kindle_Store.",
+  "download_checksums": {
+    "raw/review_categories/Kindle_Store.jsonl": {
+      "num_bytes": 15800555546,
+      "checksum": null
+    }
+  },
+  "download_size": 15800555546,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "float64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 28280863489,
+  "splits": {
+    "full": {
+      "name": "full",
+      "num_bytes": 12480307943,
+      "num_examples": 25577616,
+      "shard_lengths": [
+        977000,
+        999000,
+        945000,
+        895000,
+        941000,
+        996000,
+        1065000,
+        1039000,
+        1051000,
+        1043000,
+        888000,
+        726000,
+        871000,
+        928000,
+        1079000,
+        1016000,
+        1027000,
+        972000,
+        1126000,
+        981000,
+        1127000,
+        1195000,
+        1222000,
+        1297000,
+        1171616
+      ],
+      "dataset_name": "amazon-reviews-2023"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

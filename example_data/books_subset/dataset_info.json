@@ -1,0 +1,76 @@
+{
+  "builder_name": "amazon-reviews-2023",
+  "citation": "",
+  "config_name": "raw_review_Books",
+  "dataset_size": 16256753028,
+  "description": "Amazon Review 2023 is an updated version of the Amazon Review 2018 dataset.\nThis dataset mainly includes reviews (ratings, text) and item metadata (desc-\nriptions, category information, price, brand, and images). Compared to the pre-\nvious versions, the 2023 version features larger size, newer reviews (up to Sep\n2023), richer and cleaner meta data, and finer-grained timestamps (from day to \nmilli-second).\n\nThis is a subset for reviews in domain: Books.",
+  "download_checksums": {
+    "raw/review_categories/Books.jsonl": {
+      "num_bytes": 20121186727,
+      "checksum": null
+    }
+  },
+  "download_size": 20121186727,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "float64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 36377939755,
+  "splits": {
+    "full": {
+      "name": "full",
+      "num_bytes": 16256753028,
+      "num_examples": 29475453,
+      "shard_lengths": [
+        853000,
+        1050000,
+        846000,
+        919000,
+        860000,
+        804000,
+        761000,
+        985000,
+        1008000,
+        883000,
+        1003000,
+        994000,
+        991000,
+        840000,
+        725000,
+        643000,
+        885000,
+        917000,
+        839000,
+        951000,
+        840000,
+        911000,
+        923000,
+        759000,
+        1033000,
+        1030000,
+        969000,
+        888000,
+        1000000,
+        973000,
+        976000,
+        955000,
+        461453
+      ],
+      "dataset_name": "amazon-reviews-2023"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
