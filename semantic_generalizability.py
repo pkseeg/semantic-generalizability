@@ -1,5 +1,5 @@
 from data import read_classification_data, read_example_data
-from model import read_olmo, read_qwen3b
+from model import read_olmo, read_qwen3b, read_qwen05b
 from embed import embed
 
 
@@ -7,7 +7,7 @@ def main(a_name, b_name, c_name, dev = False):
     # Experiment steps
     if dev:
         a, b, c = read_example_data(a_name, b_name, c_name) #"example_data/kindle_subset", "example_data/books_subset", "example_data/fashion_subset"
-        model, tokenizer = read_qwen3b()
+        model, tokenizer = read_qwen05b()
     else:
         a, b, c = read_classification_data(a_name, b_name, c_name) #"raw_review_Kindle_Store", "raw_review_Books", "raw_review_Amazon_Fashion"
         model, tokenizer = read_olmo()

@@ -12,3 +12,8 @@ def read_qwen3b():
     qwen3b_tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-3B")
     qwen3b_model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-3B").to(device)
     return qwen3b_model, qwen3b_tokenizer
+
+def read_qwen05b():
+    qwen3b_tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+    qwen3b_model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct").to(device)
+    return qwen3b_model, qwen3b_tokenizer
