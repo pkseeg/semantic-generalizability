@@ -1,4 +1,5 @@
 from specialize.base_model import BaseModel
+from tqdm.auto import tqdm
 
 
 class ICLModel(BaseModel):
@@ -72,7 +73,7 @@ class ICLModel(BaseModel):
     def predict_classification(self, b):
         ytrues = []
         yhats = []
-        for sample in b:
+        for sample in tqdm(b):
             prompt = self.format_prompt(sample)
             output = self.model_out(prompt)
             yhat = self.format_out(output)
