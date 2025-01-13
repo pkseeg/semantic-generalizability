@@ -15,7 +15,7 @@ def embed(ds, model, tokenizer):
         last_hidden_state = outputs.hidden_states[-1]  # Last layer's hidden states
         embedding = mean_pooling(last_hidden_state, inputs["attention_mask"])
         embedding = embedding.cpu()
-        return {"embedding": embedding} # FIXME should I take it off the GPU here? I don't need them on the GPU at all times... I am running out of GPU RAM
+        return {"embedding": embedding}
     
     return ds.map(process_example, batched=True, batch_size=4)
 

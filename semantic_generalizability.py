@@ -1,6 +1,7 @@
 from data import read_classification_data, read_example_data
 from model import read_olmo, read_qwen3b, read_qwen05b
 from embed import embed
+from measure import depth
 
 
 def main(a_name, b_name, c_name, dev = False):
@@ -14,6 +15,8 @@ def main(a_name, b_name, c_name, dev = False):
 
     # 1. measure distance between A, B and A, C using M embedding strategy
     a_ = embed(a, model, tokenizer)
+    b_ = embed(b, model, tokenizer)
+    dist = depth(a_, b_)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
 
