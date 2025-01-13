@@ -24,7 +24,7 @@ def main(a_name, b_name, c_name, dev = False):
     #print(dist)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
-    icl = ICLModel(model)
+    icl = ICLModel(model, tokenizer)
     icl.specialize(a)
     icl.predict_classification(b)
 
