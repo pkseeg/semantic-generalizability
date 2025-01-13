@@ -1,3 +1,6 @@
+import torch
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 class BaseModel:
     def __init__(self, model, tokenizer):
         self.model = model
@@ -10,7 +13,7 @@ class BaseModel:
         pass
 
     def model_out(self, prompt):
-        inputs = self.tokenizer(prompt, return_tensors="pt")
+        inputs = self.tokenizer(prompt, return_tensors="pt").to(device)
 
         outputs = self.model.generate(
             inputs["input_ids"], 
