@@ -1,6 +1,7 @@
 import torch.nn.functional as F
 import torch
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # I need the citation here
 def info_gain(a_, b_):
@@ -10,13 +11,16 @@ def depth(a_, b_, batch_size = 32):
     a_ = torch.tensor(a_["embedding"]).float()
     b_ = torch.tensor(b_["embedding"]).float()
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    
     a_ = a_.to(device)
     b_ = b_.to(device)
 
     similarities = []
     for i in range(0, len(a_), batch_size):
         a_batch = a_[i : i + batch_size]
+        print(a_batch.shape)
+        print(b_.shape)
+        assert False
         sim = F.cosine_similarity(
             a_batch.unsqueeze(1), b_.unsqueeze(0), dim=-1
         )  
