@@ -1,11 +1,12 @@
 from data import read_classification_data
-from model import olmo_model, olmo_tokenizer
+from model import read_olmo 
 from embed import embed
 
 
 def main():
     # Experiment steps
     a, b, c = read_classification_data("raw_review_Kindle_Store", "raw_review_Books", "raw_review_Amazon_Fashion")
+    olmo_model, olmo_tokenizer = read_olmo()
 
     # 1. measure distance between A, B and A, C using M embedding strategy
     a_ = embed(a, olmo_model, olmo_tokenizer)
