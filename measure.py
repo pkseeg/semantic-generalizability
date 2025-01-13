@@ -7,8 +7,8 @@ def info_gain(a_, b_):
     pass
 
 def depth(a_, b_, batch_size = 32):
-    a_ = a_.float()
-    b_ = b_.float()
+    a_ = torch.tensor(a_["embedding"]).float()
+    b_ = torch.tensor(b_["embedding"]).float()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     a_ = a_.to(device)
