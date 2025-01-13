@@ -2,7 +2,7 @@ from data import read_classification_data, read_example_data
 from model import read_olmo, read_qwen3b, read_qwen05b
 from embed import embed
 from measure import depth
-from specialize.ICL import ICL
+from specialize.ICL import ICLModel
 
 
 def main(a_name, b_name, c_name, dev = False):
@@ -24,7 +24,7 @@ def main(a_name, b_name, c_name, dev = False):
     #print(dist)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
-    icl = ICL(model)
+    icl = ICLModel(model)
     icl.specialize(a)
     icl.predict_classification(b)
 

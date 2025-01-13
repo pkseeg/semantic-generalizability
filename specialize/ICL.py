@@ -1,9 +1,9 @@
 from specialize.base_model import BaseModel
 
 
-class ICL(BaseModel):
+class ICLModel(BaseModel):
     def __init__(self, model):
-        super().__init__(model)
+        super(self).__init__(model)
         self.prompt = self.get_prompt()
     
     def get_prommpt(self):
