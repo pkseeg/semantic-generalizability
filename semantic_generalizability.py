@@ -22,6 +22,9 @@ def main(a_name, b_name, c_name, dev = False):
     dist_b = info_gain(a_, b_)
     dist_c = info_gain(a_, c_)
 
+    print(dist_b, dist_c)
+    return True
+
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
     icl = ICLModel(model, tokenizer)
     icl.specialize(a)
