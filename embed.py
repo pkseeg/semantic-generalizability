@@ -2,6 +2,7 @@ import torch
 from tqdm.auto import tqdm
 
 def embed(ds, model, tokenizer):
+    embeddings = []
     for example in tqdm(ds):
         print("Embedding a single example")
         text = example["text"]
@@ -22,10 +23,9 @@ def embed(ds, model, tokenizer):
         print(f"Mean pooling")
         embedding = mean_pooling(last_hidden_state, inputs["attention_mask"])
         print(f"Shape of a single embedding: {embedding.shape}")
-        #assert False
         embedding = embedding.cpu()
-        # assert False
-        return {"embedding": embedding}
+        embeddings.append(embedding)
+    return {"embedding": embeddings}
 
     # def process_example(example):
     #     print("Embedding a single example")
