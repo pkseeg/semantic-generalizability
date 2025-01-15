@@ -21,12 +21,13 @@ def embed(ds, model, tokenizer):
         print(f"Mean pooling")
         embedding = mean_pooling(last_hidden_state, inputs["attention_mask"])
         print(f"Shape of a single embedding: {embedding.shape}")
-        assert False
-        #embedding = embedding.cpu()
+        #assert False
+        embedding = embedding.cpu()
+        # assert False
         return {"embedding": embedding}
     
     print("Embedding dataset.....")
-    return ds.map(process_example, batched=True, batch_size=1)
+    return ds.map(process_example, batched=False)
 
 def mean_pooling(hidden_states, attention_mask):
     masked_hidden_states = hidden_states * attention_mask.unsqueeze(-1)
