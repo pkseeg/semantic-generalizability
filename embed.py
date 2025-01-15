@@ -25,7 +25,8 @@ def embed(ds, model, tokenizer):
         #embedding = embedding.cpu()
         return {"embedding": embedding}
     
-    return ds.map(process_example, batched=True, batch_size=4)
+    print("Embedding dataset.....")
+    return ds.map(process_example, batched=True, batch_size=1)
 
 def mean_pooling(hidden_states, attention_mask):
     masked_hidden_states = hidden_states * attention_mask.unsqueeze(-1)
