@@ -1,5 +1,6 @@
 import torch.nn.functional as F
 import torch
+import numpy as np
 from tte_depth import StatDepth
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -15,9 +16,11 @@ def depth(a_, b_, batch_size = 32):
     a_ = a_.to(device)
     b_ = b_.to(device)
 
+    F, G = np.array(a_), np.array(b_)
+
 
     depth = StatDepth()
-    return depth.depth_rank_test(a_, b_)
+    return depth.depth_rank_test(F, G)
 
     # similarities = []
     # for i in range(0, len(a_), batch_size):
