@@ -25,9 +25,7 @@ class ICLModel(BaseModel):
         Review: {example_4}
         Rating: {label_4}
 
-        Review: {text}
-        Rating: 
-        '''
+        Review: {text}'''
         return prompt
 
     def format_prompt(self, sample):
