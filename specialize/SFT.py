@@ -1,5 +1,7 @@
 from specialize.base_model import BaseModel
 from tqdm.auto import trange
+from transformers import TrainingArguments, Trainer, DataCollatorWithPadding
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
 
 class SFTModel(BaseModel):
@@ -25,11 +27,52 @@ class SFTModel(BaseModel):
         return examples
     
     def specialize(self, a):
-        # a is a huggingface ds containing text and label
-        # self.model and self.tokenizer are huggingface model and tokenizer
-        # we want to fine-tune self.model using batched instances in the form of
-        # ds["text"][i] -> str(s["label"][i])
-        self.examples = self.select_random(a)
+        def preprocess_function(examples):
+            return self.tokenizer(
+                examples["text"], truncation=True, padding=True, max_length=512
+            )
+        tokenized_ds = a.map(preprocess_function, batched=True)
+
+        tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["label"]})
+
+        lora_config = LoraConfig(
+            r=8,
+            lora_alpha=32,
+            lora_dropout=0.1,
+            task_type="SEQ_CLS"
+        )
+        self.model = prepare_model_for_kbit_training(self.model)
+        self.model = get_peft_model(self.model, lora_config)
+
+        training_args = TrainingArguments(
+            output_dir="./results",
+            learning_rate=5e-5,
+            per_device_train_batch_size=16, # start with 16 I guess
+            num_train_epochs=1,
+            weight_decay=0.01,
+            evaluation_strategy=None,
+            save_strategy="epoch",
+            logging_dir="./logs",
+            logging_steps=10,
+            save_total_limit=2,
+            load_best_model_at_end=True,
+        )
+
+        data_collator = DataCollatorWithPadding(tokenizer=self.tokenizer)
+
+        trainer = Trainer(
+            model=self.model,
+            args=training_args,
+            train_dataset=tokenized_ds,
+            tokenizer=self.tokenizer,
+            data_collator=data_collator,
+        )
+
+        trainer.train()
+
+        # Save the fine-tuned model
+        #trainer.save_model("./fine_tuned_model")
+        #print("Fine-tuning completed and model saved.")
     
     def format_out(self, output):
         if "1" in output:

@@ -70,7 +70,7 @@ class ICLModel(BaseModel):
         return 5
         
     
-    def predict_classification(self, b, batch_size = 4):
+    def predict_classification(self, b, batch_size = 2): # batch size of 2 should work on the colab A100 for OlMO
         ytrues = []
         yhats = []
         for i in trange(0, len(b), batch_size):
