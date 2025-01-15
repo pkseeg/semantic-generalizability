@@ -2,28 +2,13 @@ from specialize.base_model import BaseModel
 from tqdm.auto import trange
 
 
-class ICLModel(BaseModel):
+class SFTModel(BaseModel):
     def __init__(self, model, tokenizer):
-        super(ICLModel, self).__init__(model, tokenizer)
+        super(SFTModel, self).__init__(model, tokenizer)
         self.prompt = self.get_prompt()
     
     def get_prompt(self):
         prompt = '''Give the star rating (1-5) of the following reviews.
-
-        Review: {example_0}
-        Rating: {label_0}
-
-        Review: {example_1}
-        Rating: {label_1}
-
-        Review: {example_2}
-        Rating: {label_2}
-
-        Review: {example_3}
-        Rating: {label_3}
-
-        Review: {example_4}
-        Rating: {label_4}
 
         Review: {text}
         Rating: 
@@ -31,24 +16,8 @@ class ICLModel(BaseModel):
         return prompt
 
     def format_prompt(self, sample):
-        example_0 = self.examples["text"][0]
-        label_0 = str(int(self.examples["label"][0]))
-
-        example_1 = self.examples["text"][1]
-        label_1 = str(int(self.examples["label"][1]))
-
-        example_2 = self.examples["text"][2]
-        label_2 = str(int(self.examples["label"][2]))
-
-        example_3 = self.examples["text"][3]
-        label_3 = str(int(self.examples["label"][3]))
-
-        example_4 = self.examples["text"][4]
-        label_4 = str(int(self.examples["label"][4]))
-
         text = sample["text"]
-
-        return self.prompt.format(example_0=example_0, label_0=label_0, example_1=example_1, label_1=label_1, example_2=example_2, label_2=label_2, example_3=example_3, label_3=label_3, example_4=example_4, label_4=label_4, text=text)
+        return self.prompt.format(text=text)
 
     
     def select_random(self, a, k = 5):
@@ -56,6 +25,10 @@ class ICLModel(BaseModel):
         return examples
     
     def specialize(self, a):
+        # a is a huggingface ds containing text and label
+        # self.model and self.tokenizer are huggingface model and tokenizer
+        # we want to fine-tune self.model using batched instances in the form of
+        # ds["text"][i] -> str(s["label"][i])
         self.examples = self.select_random(a)
     
     def format_out(self, output):
@@ -70,7 +43,7 @@ class ICLModel(BaseModel):
         return 5
         
     
-    def predict_classification(self, b, batch_size = 4):
+    def predict_classification(self, b, batch_size = 32):
         ytrues = []
         yhats = []
         for i in trange(0, len(b), batch_size):

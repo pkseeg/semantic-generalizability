@@ -19,7 +19,6 @@ def main(a_name, b_name, c_name, dev = False):
 
     print(f"Embedding {len(a) + len(b) + len(c)} texts with the model")
     # 1. measure distance between A, B and A, C using M embedding strategy
-    print(f"Embedding a")
     #a_ = embed(a, model, tokenizer)
     #b_ = embed(b, model, tokenizer)
     #c_ = embed(c, model, tokenizer)
@@ -32,11 +31,14 @@ def main(a_name, b_name, c_name, dev = False):
     print(dist_b, dist_c)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
+    print(f"Specializing the model with dataset A")
     icl = ICLModel(model, tokenizer)
     icl.specialize(a)
 
     # 3. evaluate M_A on B and C
+    print(f"Predicting B with M_A")
     ytrues_b, yhats_b = icl.predict_classification(b)
+    print(f"Predicting C with M_A")
     ytrues_c, yhats_c = icl.predict_classification(c)
     f1_b = f1(ytrues_b, yhats_b)
     f1_c = f1(ytrues_c, yhats_c)
