@@ -1,6 +1,6 @@
 from data import read_classification_data, read_example_data
 from model import read_olmo, read_qwen3b, read_qwen05b
-from embed import embed
+from embed import embed, embed_sbert
 from measure import depth, info_gain
 from specialize.ICL import ICLModel
 from scoring.classification import f1
@@ -20,11 +20,14 @@ def main(a_name, b_name, c_name, dev = False):
     print(f"Embedding {len(a) + len(b) + len(c)} texts with the model")
     # 1. measure distance between A, B and A, C using M embedding strategy
     print(f"Embedding a")
-    a_ = embed(a, model, tokenizer)
-    b_ = embed(b, model, tokenizer)
-    c_ = embed(c, model, tokenizer)
-    dist_b = info_gain(a_, b_)
-    dist_c = info_gain(a_, c_)
+    #a_ = embed(a, model, tokenizer)
+    #b_ = embed(b, model, tokenizer)
+    #c_ = embed(c, model, tokenizer)
+    a_ = embed_sbert(a)
+    b_ = embed_sbert(b)
+    c_ = embed_sbert(c)
+    dist_b = depth(a_, b_)
+    dist_c = depth(a_, c_)
 
     print(dist_b, dist_c)
 

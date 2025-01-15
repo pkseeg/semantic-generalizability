@@ -20,15 +20,11 @@ def info_gain(a_, b_):
     min_distances = distances.min(dim=1).values
     return min_distances.mean().item()
 
-def depth(a_, b_, batch_size = 32):
-    
-    
-
-    F, G = np.array(a_), np.array(b_)
-
-
-    depth = StatDepth()
-    return depth.depth_rank_test(F, G)
+def depth(a_, b_):
+    d = StatDepth()
+    depth_scores_a, depth_scores_b, Q, W, p = d.depth_rank_test(a_, b_)
+    print(f"Q = {Q:.2f}, W = {W:.2f}, p = {p:.4f}")
+    return Q
 
     # similarities = []
     # for i in range(0, len(a_), batch_size):

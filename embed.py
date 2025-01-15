@@ -1,5 +1,13 @@
 import torch
 from tqdm.auto import tqdm
+from sentence_transformers import SentenceTransformer
+from tte_depth import StatDepth
+
+def embed_sbert(ds):
+    embed_model = SentenceTransformer('all-MiniLM-L6-v2')
+    texts = ds["text"]
+    return embed_model.encode(texts)
+    
 
 def embed(ds, model, tokenizer):
     embeddings = []
