@@ -14,7 +14,7 @@ def embed(ds, model, tokenizer):
             outputs = model(**inputs, output_hidden_states=True)
         last_hidden_state = outputs.hidden_states[-1]  # Last layer's hidden states
         embedding = mean_pooling(last_hidden_state, inputs["attention_mask"])
-        embedding = embedding.cpu()
+        #embedding = embedding.cpu()
         return {"embedding": embedding}
     
     return ds.map(process_example, batched=True, batch_size=4)
