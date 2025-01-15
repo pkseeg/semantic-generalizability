@@ -18,7 +18,7 @@ def info_gain(a_, b_):
     a_, b_ = transform_embeds(a_, b_)
     distances = torch.cdist(b_.unsqueeze(0), a_.unsqueeze(0)).squeeze(0)
     min_distances = distances.min(dim=1).values
-    return min_distances.mean()
+    return min_distances.mean().item()
 
 def depth(a_, b_, batch_size = 32):
     
