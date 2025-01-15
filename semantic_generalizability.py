@@ -1,7 +1,7 @@
 from data import read_classification_data, read_example_data
 from model import read_olmo, read_qwen3b, read_qwen05b
 from embed import embed
-from measure import depth
+from measure import depth, info_gain
 from specialize.ICL import ICLModel
 from scoring.classification import f1
 
@@ -19,8 +19,8 @@ def main(a_name, b_name, c_name, dev = False):
     a_ = embed(a, model, tokenizer)
     b_ = embed(b, model, tokenizer)
     c_ = embed(c, model, tokenizer)
-    dist_b = depth(a_, b_)
-    dist_c = depth(a_, c_)
+    dist_b = info_gain(a_, b_)
+    dist_c = info_gain(a_, c_)
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
     icl = ICLModel(model, tokenizer)
