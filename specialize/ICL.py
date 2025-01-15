@@ -77,6 +77,8 @@ class ICLModel(BaseModel):
             samples = b.select(range(i, min(i + batch_size, len(b))))
             prompts = [self.format_prompt(sample) for sample in samples]
             decoded_outputs = self.model_out(prompts)
+            print(decoded_outputs[0])
+            assert False
             yhat = [self.format_out(output) for output in decoded_outputs]
             ytrues.extend([sample["label"] for sample in samples])
             yhats.extend(yhat)
