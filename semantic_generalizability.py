@@ -3,6 +3,7 @@ from model import read_olmo, read_qwen3b, read_qwen05b
 from embed import embed, embed_sbert
 from measure import depth, info_gain
 from specialize.ICL import ICLModel
+from specialize.SFT import SFTModel
 from scoring.classification import f1
 
 
@@ -32,6 +33,14 @@ def main(a_name, b_name, c_name, dev = False):
 
     # 2. set up M_A as M specialized in A (either via ICL, RAG, SFT, or DPO)
     print(f"Specializing the model with dataset A")
+
+    # SFT
+    sft = SFTModel(model, tokenizer)
+    sft.specialize(a)
+    assert False
+
+
+    # ICL
     icl = ICLModel(model, tokenizer)
     icl.specialize(a)
 
