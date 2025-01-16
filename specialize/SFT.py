@@ -27,12 +27,14 @@ class SFTModel(BaseModel):
         return examples
     
     def specialize(self, a):
+        print(type(a))
+        print(len(a))
         def preprocess_function(examples):
             return self.tokenizer(
                 examples["text"], truncation=True, padding=True, max_length=512
             )
         print(f"Tokenizing")
-        tokenized_ds = a.map(preprocess_function, batched=True)
+        tokenized_ds = a.map(preprocess_function, batched=True, batch_size = 4)
 
         print(f"Renaming labels")
         tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["label"]})
