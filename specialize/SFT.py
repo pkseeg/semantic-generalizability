@@ -34,7 +34,7 @@ class SFTModel(BaseModel):
                 examples["text"], truncation=True, padding=True, max_length=512
             )
         print(f"Tokenizing")
-        tokenized_ds = a.map(preprocess_function, batched=True, batch_size = 4, writer_batch_size=8)
+        tokenized_ds = a.map(preprocess_function, writer_batch_size=8)
 
         print(f"Renaming labels")
         tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["label"]})
