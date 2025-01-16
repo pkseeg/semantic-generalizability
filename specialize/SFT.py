@@ -31,19 +31,27 @@ class SFTModel(BaseModel):
             return self.tokenizer(
                 examples["text"], truncation=True, padding=True, max_length=512
             )
+        print(f"Tokenizing")
         tokenized_ds = a.map(preprocess_function, batched=True)
 
+        print(f"Renaming labels")
         tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["label"]})
 
+        print(f"Setting up LoRA")
         lora_config = LoraConfig(
             r=8,
             lora_alpha=32,
             lora_dropout=0.1,
             task_type="SEQ_CLS"
         )
+
+        print(f"Prep for kbit")
         self.model = prepare_model_for_kbit_training(self.model)
+
+        print(f"PEFT")
         self.model = get_peft_model(self.model, lora_config)
 
+        print(f"Setting training args")
         training_args = TrainingArguments(
             output_dir="./results",
             learning_rate=5e-5,
@@ -58,8 +66,10 @@ class SFTModel(BaseModel):
             load_best_model_at_end=True,
         )
 
+        print(f"Data collator")
         data_collator = DataCollatorWithPadding(tokenizer=self.tokenizer)
 
+        print(f"trainer")
         trainer = Trainer(
             model=self.model,
             args=training_args,
@@ -68,6 +78,7 @@ class SFTModel(BaseModel):
             data_collator=data_collator,
         )
 
+        print(f"training")
         trainer.train()
 
         # Save the fine-tuned model
