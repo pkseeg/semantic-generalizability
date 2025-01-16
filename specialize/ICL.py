@@ -57,7 +57,6 @@ class ICLModel(BaseModel):
         self.examples = self.select_random(a)
     
     def format_out(self, output):
-        o = 
         if "1" in output:
             return 1
         elif "2" in output:
