@@ -14,15 +14,15 @@ class ICLModel(BaseModel):
         prompt = '''Give the star rating (1-5) of the following reviews.
 
         Context: {context_0}
-        Question: {label_0}
+        Question: {question_0}
         Answer: {answer_0}
 
         Context: {context_1}
-        Question: {label_1}
+        Question: {question_1}
         Answer: {answer_1}
 
         Context: {context_2}
-        Question: {label_2}
+        Question: {question_2}
         Answer: {answer_2}
 
         Context: {context}
