@@ -13,15 +13,15 @@ class ICLModel(BaseModel):
     def get_prompt_qa(self):
         prompt = '''Give the star rating (1-5) of the following reviews.
 
-        Context: {example_0}
+        Context: {context_0}
         Question: {label_0}
         Answer: {answer_0}
 
-        Context: {example_1}
+        Context: {context_1}
         Question: {label_1}
         Answer: {answer_1}
 
-        Context: {example_2}
+        Context: {context_2}
         Question: {label_2}
         Answer: {answer_2}
 
