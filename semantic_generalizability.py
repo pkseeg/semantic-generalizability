@@ -50,7 +50,7 @@ def main(a_name, b_name, c_name, task = "classification", dev = False):
 
 
     # ICL
-    icl = ICLModel(model, tokenizer)
+    icl = ICLModel(model, tokenizer, tasl="qa")
     icl.specialize(a)
 
     # 3. evaluate M_A on B and C
