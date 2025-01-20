@@ -44,9 +44,9 @@ def main(a_name, b_name, c_name, task = "classification", dev = False):
     print(f"Specializing the model with dataset A")
 
     # SFT
-    sft = SFTModel(model, tokenizer)
-    sft.specialize(a)
-    assert False
+    # sft = SFTModel(model, tokenizer)
+    # sft.specialize(a)
+    # assert False
 
 
     # ICL
@@ -55,14 +55,17 @@ def main(a_name, b_name, c_name, task = "classification", dev = False):
 
     # 3. evaluate M_A on B and C
     print(f"Predicting B with M_A")
-    ytrues_b, yhats_b = icl.predict_classification(b)
+    ytrues_b, yhats_b = icl.predict_qa(b)
+    print(ytrues_b)
+    print(yhats_b)
+    assert False
     print(f"Predicting C with M_A")
-    ytrues_c, yhats_c = icl.predict_classification(c)
+    ytrues_c, yhats_c = icl.predict_qa(c)
     f1_b = f1(ytrues_b, yhats_b)
     f1_c = f1(ytrues_c, yhats_c)
 
-    print(f"Distance between A, B: {dist_b}\nScore of ICL A on B: {f1_b}")
-    print(f"Distance between A, C: {dist_c}\nScore of ICL A on C: {f1_c}")
+    # print(f"Distance between A, B: {dist_b}\nScore of ICL A on B: {f1_b}")
+    # print(f"Distance between A, C: {dist_c}\nScore of ICL A on C: {f1_c}")
 
 
 
