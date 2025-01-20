@@ -31,14 +31,15 @@ def read_qa_data(a_name, subset_size = 500):
 def read_qa_eval(name):
     ds = load_from_disk(name)
     if len(ds["test"]) > 0 :
-        ds["test"][0]["context"]
-        ds["test"][0]["question"]
-        ds["test"][0]["answer"]
+        return ds["test"]
+        # ds["test"][0]["context"]
+        # ds["test"][0]["question"]
+        # ds["test"][0]["answer"]
     else:
-        ds["validation"][0]["context"]
-        ds["validation"][0]["question"]
-        ds["validation"][0]["answer"]
-    # FIXME
+        # ds["validation"][0]["context"]
+        # ds["validation"][0]["question"]
+        # ds["validation"][0]["answer"]
+        return ds["validation"]
 
 def read_classification_eval(name):
     ds = load_from_disk(name)
