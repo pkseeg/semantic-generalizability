@@ -7,6 +7,7 @@ from measure import depth, info_gain
 from specialize.ICL import ICLModel
 from specialize.SFT import SFTModel
 from scoring.classification import f1
+from scoring.qa import exact_match
 
 
 def main(a_name, b_name, c_name, task = "classification", dev = False):
@@ -58,12 +59,17 @@ def main(a_name, b_name, c_name, task = "classification", dev = False):
     ytrues_b, yhats_b = icl.predict_qa(b)
     print(ytrues_b)
     print(yhats_b)
-    assert False
     print(f"Predicting C with M_A")
     ytrues_c, yhats_c = icl.predict_qa(c)
-    f1_b = f1(ytrues_b, yhats_b)
-    f1_c = f1(ytrues_c, yhats_c)
 
+    if task == "classificaion":
+        f1_b = f1(ytrues_b, yhats_b)
+        f1_c = f1(ytrues_c, yhats_c)
+    elif task == "qa":
+        exact_match_b = exact_match(ytrues_b, yhats_b)
+        exact_match_c = exact_match(ytrues_c, yhats_c)
+
+    print(exact_match_b, exact_match_c)
     # print(f"Distance between A, B: {dist_b}\nScore of ICL A on B: {f1_b}")
     # print(f"Distance between A, C: {dist_c}\nScore of ICL A on C: {f1_c}")
 

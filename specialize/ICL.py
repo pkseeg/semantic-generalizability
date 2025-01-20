@@ -138,7 +138,7 @@ class ICLModel(BaseModel):
             prompts = [self.format_prompt_qa(sample) for sample in samples]
             decoded_outputs = self.model_out(prompts)
             yhat = [output[len(prompt):].strip() for output, prompt in zip(decoded_outputs, prompts)]
-            ytrues.extend([sample["questions"] for sample in samples])
+            ytrues.extend([sample["answers"] for sample in samples])
             yhats.extend(yhat)
         return ytrues, yhats
 
