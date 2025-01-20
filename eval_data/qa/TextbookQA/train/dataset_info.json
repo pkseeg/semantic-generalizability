@@ -1,0 +1,172 @@
+{
+  "citation": "",
+  "config_name": "plain_text",
+  "dataset_size": 4666006905,
+  "description": "",
+  "download_checksums": {
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00000-of-00009.parquet": {
+      "num_bytes": 40937968,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00001-of-00009.parquet": {
+      "num_bytes": 83288515,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00002-of-00009.parquet": {
+      "num_bytes": 168678531,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00003-of-00009.parquet": {
+      "num_bytes": 330623073,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00004-of-00009.parquet": {
+      "num_bytes": 313450289,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00005-of-00009.parquet": {
+      "num_bytes": 295803474,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00006-of-00009.parquet": {
+      "num_bytes": 96192618,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00007-of-00009.parquet": {
+      "num_bytes": 80208968,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/train-00008-of-00009.parquet": {
+      "num_bytes": 76950665,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/validation-00000-of-00001.parquet": {
+      "num_bytes": 177544051,
+      "checksum": null
+    },
+    "https://huggingface.co/datasets/mrqa-workshop/mrqa/resolve/f3178d9888471dfb2b67c93de14f0ddf499a8d9f/plain_text/test-00000-of-00001.parquet": {
+      "num_bytes": 15483098,
+      "checksum": null
+    }
+  },
+  "download_size": 1679161250,
+  "features": {
+    "subset": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "context": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "context_tokens": {
+      "feature": {
+        "tokens": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "offsets": {
+          "dtype": "int32",
+          "_type": "Value"
+        }
+      },
+      "_type": "Sequence"
+    },
+    "qid": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "question": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "question_tokens": {
+      "feature": {
+        "tokens": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "offsets": {
+          "dtype": "int32",
+          "_type": "Value"
+        }
+      },
+      "_type": "Sequence"
+    },
+    "detected_answers": {
+      "feature": {
+        "text": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "char_spans": {
+          "feature": {
+            "start": {
+              "dtype": "int32",
+              "_type": "Value"
+            },
+            "end": {
+              "dtype": "int32",
+              "_type": "Value"
+            }
+          },
+          "_type": "Sequence"
+        },
+        "token_spans": {
+          "feature": {
+            "start": {
+              "dtype": "int32",
+              "_type": "Value"
+            },
+            "end": {
+              "dtype": "int32",
+              "_type": "Value"
+            }
+          },
+          "_type": "Sequence"
+        }
+      },
+      "_type": "Sequence"
+    },
+    "answers": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "Sequence"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 6345168155,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 4120261468,
+      "num_examples": 516819,
+      "shard_lengths": [
+        114850,
+        50000,
+        37425,
+        37424,
+        40000,
+        37424,
+        77424,
+        122272
+      ],
+      "dataset_name": "parquet"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 487617765,
+      "num_examples": 58221,
+      "dataset_name": "parquet"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 58127672,
+      "num_examples": 9633,
+      "dataset_name": "parquet"
+    }
+  }
+}

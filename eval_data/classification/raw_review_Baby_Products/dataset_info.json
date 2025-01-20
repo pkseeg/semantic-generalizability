@@ -1,0 +1,48 @@
+{
+  "builder_name": "amazon-reviews-2023",
+  "citation": "",
+  "config_name": "raw_review_Baby_Products",
+  "dataset_size": 2126291989,
+  "description": "Amazon Review 2023 is an updated version of the Amazon Review 2018 dataset.\nThis dataset mainly includes reviews (ratings, text) and item metadata (desc-\nriptions, category information, price, brand, and images). Compared to the pre-\nvious versions, the 2023 version features larger size, newer reviews (up to Sep\n2023), richer and cleaner meta data, and finer-grained timestamps (from day to \nmilli-second).\n\nThis is a subset for reviews in domain: Baby_Products.",
+  "download_checksums": {
+    "raw/review_categories/Baby_Products.jsonl": {
+      "num_bytes": 2947785967,
+      "checksum": null
+    }
+  },
+  "download_size": 2947785967,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "float64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 5074077956,
+  "splits": {
+    "full": {
+      "name": "full",
+      "num_bytes": 2126291989,
+      "num_examples": 6028884,
+      "shard_lengths": [
+        1339000,
+        1424000,
+        1424000,
+        1467000,
+        374884
+      ],
+      "dataset_name": "amazon-reviews-2023"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

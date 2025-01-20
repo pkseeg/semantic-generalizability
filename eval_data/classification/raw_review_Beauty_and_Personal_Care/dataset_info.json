@@ -1,0 +1,59 @@
+{
+  "builder_name": "amazon-reviews-2023",
+  "citation": "",
+  "config_name": "raw_review_Beauty_and_Personal_Care",
+  "dataset_size": 7719290092,
+  "description": "Amazon Review 2023 is an updated version of the Amazon Review 2018 dataset.\nThis dataset mainly includes reviews (ratings, text) and item metadata (desc-\nriptions, category information, price, brand, and images). Compared to the pre-\nvious versions, the 2023 version features larger size, newer reviews (up to Sep\n2023), richer and cleaner meta data, and finer-grained timestamps (from day to \nmilli-second).\n\nThis is a subset for reviews in domain: Beauty_and_Personal_Care.",
+  "download_checksums": {
+    "raw/review_categories/Beauty_and_Personal_Care.jsonl": {
+      "num_bytes": 11021458876,
+      "checksum": null
+    }
+  },
+  "download_size": 11021458876,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "float64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 18740748968,
+  "splits": {
+    "full": {
+      "name": "full",
+      "num_bytes": 7719290092,
+      "num_examples": 23911390,
+      "shard_lengths": [
+        1363000,
+        1493000,
+        1507000,
+        1428000,
+        1600000,
+        1529000,
+        1578000,
+        1577000,
+        1509000,
+        1580000,
+        1555000,
+        1552000,
+        1653000,
+        1632000,
+        1639000,
+        716390
+      ],
+      "dataset_name": "amazon-reviews-2023"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

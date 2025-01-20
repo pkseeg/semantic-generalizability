@@ -1,0 +1,49 @@
+{
+  "builder_name": "amazon-reviews-2023",
+  "citation": "",
+  "config_name": "raw_review_Arts_Crafts_and_Sewing",
+  "dataset_size": 2695018480,
+  "description": "Amazon Review 2023 is an updated version of the Amazon Review 2018 dataset.\nThis dataset mainly includes reviews (ratings, text) and item metadata (desc-\nriptions, category information, price, brand, and images). Compared to the pre-\nvious versions, the 2023 version features larger size, newer reviews (up to Sep\n2023), richer and cleaner meta data, and finer-grained timestamps (from day to \nmilli-second).\n\nThis is a subset for reviews in domain: Arts_Crafts_and_Sewing.",
+  "download_checksums": {
+    "raw/review_categories/Arts_Crafts_and_Sewing.jsonl": {
+      "num_bytes": 3945063799,
+      "checksum": null
+    }
+  },
+  "download_size": 3945063799,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "float64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 6640082279,
+  "splits": {
+    "full": {
+      "name": "full",
+      "num_bytes": 2695018480,
+      "num_examples": 8966758,
+      "shard_lengths": [
+        1593000,
+        1655000,
+        1654000,
+        1683000,
+        1707000,
+        674758
+      ],
+      "dataset_name": "amazon-reviews-2023"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
