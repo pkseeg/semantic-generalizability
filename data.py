@@ -29,7 +29,7 @@ def read_qa_data(a_name, subset_size = 500):
     return processed_ds
 
 def read_qa_eval(name):
-    ds = load_from_disk(f"eval_data/qa/{name}")
+    ds = load_from_disk(name)
     if len(ds["test"]) > 0 :
         ds["test"][0]["context"]
         ds["test"][0]["question"]
@@ -41,7 +41,7 @@ def read_qa_eval(name):
     # FIXME
 
 def read_classification_eval(name):
-    ds = load_from_disk(f"eval_data/classification/{name}")
+    ds = load_from_disk(name)
     ds[0]['text']
     ds[0]['label']
     # FIXME

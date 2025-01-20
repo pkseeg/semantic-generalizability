@@ -16,9 +16,9 @@ def main(a_name, b_name, c_name, task = "classification", dev = False):
         if task == "classification":
             a, b, c = read_example_data(a_name, b_name, c_name) #"example_data/kindle_subset", "example_data/books_subset", "example_data/fashion_subset"
         elif task == "qa":
-            a = read_qa_eval("SearchQA")
-            b = read_qa_eval("BioASQ")
-            c = read_qa_eval("SQuAD")
+            a = read_qa_eval(a_name)
+            b = read_qa_eval(b_name)
+            c = read_qa_eval(c_name)
         #model, tokenizer = read_qwen05b()
         model, tokenizer = read_olmo()
     else:
