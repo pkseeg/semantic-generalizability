@@ -54,7 +54,7 @@ class ICLModel(BaseModel):
         return examples
     
     def specialize(self, a):
-        self.examples = self.select_random(a)
+        self.data_pool = a
     
     def format_out(self, output):
         if "1" in output:
@@ -72,6 +72,8 @@ class ICLModel(BaseModel):
         ytrues = []
         yhats = []
         for i in trange(0, len(b), batch_size):
+            # every batch selects  a new set of examples
+            self.examples = self.select_random(self.data_pool)
             samples = b.select(range(i, min(i + batch_size, len(b))))
             prompts = [self.format_prompt(sample) for sample in samples]
             decoded_outputs = self.model_out(prompts)

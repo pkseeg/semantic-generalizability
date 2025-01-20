@@ -15,6 +15,7 @@ def main(a_name, b_name, c_name, dev = False):
         #model, tokenizer = read_qwen05b()
         model, tokenizer = read_olmo()
     else:
+        # FIXME read the A data on its own, then read b and c from the eval data
         a, b, c = read_classification_data(a_name, b_name, c_name) #"raw_review_Kindle_Store", "raw_review_Books", "raw_review_Amazon_Fashion"
         model, tokenizer = read_olmo()
 

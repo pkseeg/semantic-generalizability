@@ -29,6 +29,10 @@ class SFTModel(BaseModel):
     def specialize(self, a):
         print(type(a))
         print(len(a))
+        # FIXME
+        # I cannot for the life of me figure out why the dataset map is crashing ram. 
+        # This should be nowhere near 80gb of data.
+
         def preprocess_function(examples):
             return self.tokenizer(
                 examples["text"], truncation=True, padding=True, max_length=512
