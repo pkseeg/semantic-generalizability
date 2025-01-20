@@ -34,11 +34,11 @@ def read_qa_eval(name):
         return ds["test"]
         # ds["test"][0]["context"]
         # ds["test"][0]["question"]
-        # ds["test"][0]["answer"]
+        # ds["test"][0]["answers"]
     else:
         # ds["validation"][0]["context"]
         # ds["validation"][0]["question"]
-        # ds["validation"][0]["answer"]
+        # ds["validation"][0]["answers"]
         return ds["validation"]
 
 def read_classification_eval(name):
