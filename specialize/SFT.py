@@ -42,6 +42,9 @@ class SFTModel(BaseModel):
         a.add_column("output", [ans[0] for ans in a["answers"]])
         a.add_column("input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
 
+        print(a)
+        print(a[0])
+
         def preprocess_function(examples):
             inputs = examples["input"]
             targets = examples["output"]
