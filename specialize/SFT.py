@@ -36,11 +36,25 @@ class SFTModel(BaseModel):
         elif self.task == "qa":
             return [self.prompt.format(context=context, question=question) for context, question in zip(examples["context"], examples["question"])]
     
+
+    def add_new_column(self, df, col_name, col_values):
+        # Define a function to add the new column
+        def create_column(updated_df):
+            updated_df[col_name] = col_values  # Assign specific values
+            return updated_df
+
+        # Apply the function to each item in the dataset
+        df = df.map(create_column)
+
+        return df
+
     def specialize(self, a):
 
         # let's do the dataset first
-        a.add_column("output", [ans[0] for ans in a["answers"]])
-        a.add_column("input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
+        self.add_new_column(a, "output", [ans[0] for ans in a["answers"]])
+        self.add_new_column(a, "input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
+        #a.add_column("output", [ans[0] for ans in a["answers"]])
+        #a.add_column("input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
 
         print(a)
         print(a[0])
