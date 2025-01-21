@@ -45,7 +45,7 @@ def main(a_name, b_name, c_name, task = "classification", dev = False):
     print(f"Specializing the model with dataset A (SFT)")
 
     # SFT
-    sft = SFTModel(model, tokenizer, tas="qa")
+    sft = SFTModel(model, tokenizer, task="qa")
     sft.specialize(a)
     assert False
 
