@@ -83,7 +83,7 @@ class SFTModel(BaseModel):
             logging_dir="./logs",
             logging_steps=10,
             save_total_limit=2,
-            load_best_model_at_end=True,
+            load_best_model_at_end=False,
         )
 
         print(f"Data collator")
