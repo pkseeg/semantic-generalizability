@@ -36,26 +36,19 @@ class SFTModel(BaseModel):
         elif self.task == "qa":
             return [self.prompt.format(context=context, question=question) for context, question in zip(examples["context"], examples["question"])]
     
-    def select_random(self, a, k = 5):
-        examples = a.select(range(k))
-        return examples
-    
     def specialize(self, a):
-        print(type(a))
-        print(len(a))
-        # FIXME
-        # I cannot for the life of me figure out why the dataset map is crashing ram. 
-        # This should be nowhere near 80gb of data.
 
         def preprocess_function(examples):
             return self.tokenizer(
                 self.format_prompt(examples), truncation=True, padding=True, max_length=512
             )
         print(f"Tokenizing")
-        tokenized_ds = a.map(preprocess_function, writer_batch_size=8)
+        tokenized_ds = a.map(preprocess_function)
 
         print(f"Renaming labels")
         tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["answers"][0]})
+
+        print(tokenized_ds[0])
 
         print(f"Setting up LoRA")
         lora_config = LoraConfig(
