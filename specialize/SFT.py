@@ -46,7 +46,8 @@ class SFTModel(BaseModel):
         tokenized_ds = a.map(preprocess_function, batched=True)
 
         print(f"Renaming labels")
-        tokenized_ds = tokenized_ds.map(lambda x: {"labels": self.tokenizer(x["answers"][0], truncation=True, padding=True)})
+        #tokenized_ds = tokenized_ds.map(lambda x: {"labels": self.tokenizer(x["answers"][0], truncation=True, padding=True)})
+        tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["answers"][0]})
 
         print(tokenized_ds[0])
 
