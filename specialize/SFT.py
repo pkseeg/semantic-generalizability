@@ -55,7 +55,7 @@ class SFTModel(BaseModel):
         tokenized_ds = a.map(preprocess_function, writer_batch_size=8)
 
         print(f"Renaming labels")
-        tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["label"]})
+        tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["answers"][0]})
 
         print(f"Setting up LoRA")
         lora_config = LoraConfig(
