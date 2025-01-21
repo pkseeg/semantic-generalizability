@@ -5,22 +5,36 @@ from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
 
 class SFTModel(BaseModel):
-    def __init__(self, model, tokenizer):
+    def __init__(self, model, tokenizer, task = "classification"):
         super(SFTModel, self).__init__(model, tokenizer)
-        self.prompt = self.get_prompt()
+        if task == "classification":
+            self.prompt = self.get_prompt_classification()
+        elif task == "qa":
+            self.prompt = self.get_prompt_qa()
+        self.task = task
+
+        # FIXME ADJUST CLASSIFICATION
     
-    def get_prompt(self):
+    def get_prompt_classification(self):
         prompt = '''Give the star rating (1-5) of the following reviews.
 
         Review: {text}
-        Rating: 
-        '''
+        Rating:'''
+        return prompt
+    
+    def get_prompt_qa(self):
+        prompt = '''Answer the following question, given the context.
+
+        Context: {context}
+        Question: {question}
+        Answer:'''
         return prompt
 
-    def format_prompt(self, sample):
-        text = sample["text"]
-        return self.prompt.format(text=text)
-
+    def format_prompt(self, examples):
+        if self.task == "classification":
+            return [self.prompt.format(text=text) for text in examples["text"]]
+        elif self.task == "qa":
+            return [self.prompt.format(context=context, question=question) for context, question in zip(examples["context"], examples["question"])]
     
     def select_random(self, a, k = 5):
         examples = a.select(range(k))
@@ -35,7 +49,7 @@ class SFTModel(BaseModel):
 
         def preprocess_function(examples):
             return self.tokenizer(
-                examples["text"], truncation=True, padding=True, max_length=512
+                self.format_prompt(examples), truncation=True, padding=True, max_length=512
             )
         print(f"Tokenizing")
         tokenized_ds = a.map(preprocess_function, writer_batch_size=8)
