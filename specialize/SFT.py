@@ -39,8 +39,8 @@ class SFTModel(BaseModel):
     def specialize(self, a):
 
         # let's do the dataset first
-        a["output"] = [ans[0] for ans in a["answers"]]
-        a["input"] = [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])]
+        a.add_column("output", [ans[0] for ans in a["answers"]])
+        a.add_column("input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
 
         def preprocess_function(examples):
             inputs = examples["input"]
