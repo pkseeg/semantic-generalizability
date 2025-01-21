@@ -12,8 +12,6 @@ class SFTModel(BaseModel):
         elif task == "qa":
             self.prompt = self.get_prompt_qa()
         self.task = task
-
-        # FIXME ADJUST CLASSIFICATION
     
     def get_prompt_classification(self):
         prompt = '''Give the star rating (1-5) of the following reviews.
@@ -50,18 +48,18 @@ class SFTModel(BaseModel):
 
     def specialize(self, a):
 
-        # let's do the dataset first
-        self.add_new_column(a, "output", [ans[0] for ans in a["answers"]])
-        self.add_new_column(a, "input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
-        #a.add_column("output", [ans[0] for ans in a["answers"]])
-        #a.add_column("input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
+        # # let's do the dataset first
+        # self.add_new_column(a, "output", [ans[0] for ans in a["answers"]])
+        # self.add_new_column(a, "input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
+        # #a.add_column("output", [ans[0] for ans in a["answers"]])
+        # #a.add_column("input", [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])])
 
-        print(a)
-        print(a[0])
+        # print(a)
+        # print(a[0])
 
         def preprocess_function(examples):
-            inputs = examples["input"]
-            targets = examples["output"]
+            inputs = [ans[0] for ans in examples["answers"]]
+            targets = [self.prompt.format(context=context, question=question) for context, question in zip(examples["context"], examples["question"])]
             model_inputs = self.tokenizer(inputs, truncation=True, padding=True, max_length=512)
             labels = self.tokenizer(targets, truncation=True, padding=True, max_length=512)
             model_inputs["labels"] = labels["input_ids"]
@@ -74,6 +72,7 @@ class SFTModel(BaseModel):
         #tokenized_ds = tokenized_ds.map(lambda x: {"labels": self.tokenizer(x["answers"][0], truncation=True, padding=True)})
         #tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["answers"][0]})
 
+        print(tokenized_ds)
         print(tokenized_ds[0])
 
         print(f"Setting up LoRA")
