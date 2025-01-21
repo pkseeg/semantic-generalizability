@@ -37,17 +37,25 @@ class SFTModel(BaseModel):
             return [self.prompt.format(context=context, question=question) for context, question in zip(examples["context"], examples["question"])]
     
     def specialize(self, a):
+
+        # let's do the dataset first
+        a["output"] = [ans[0] for ans in a["answers"]]
+        a["input"] = [self.prompt.format(context=context, question=question) for context, question in zip(a["context"], a["question"])]
+
         def preprocess_function(examples):
-            formatted_prompts = self.format_prompt(examples)
-            return self.tokenizer(
-                formatted_prompts, truncation=True, padding=True, max_length=512
-            )
+            inputs = examples["input"]
+            targets = examples["output"]
+            model_inputs = self.tokenizer(inputs, truncation=True, padding=True, max_length=512)
+            labels = self.tokenizer(targets, truncation=True, padding=True, max_length=512)
+            model_inputs["labels"] = labels["input_ids"]
+            return model_inputs
+        
         print(f"Tokenizing")
         tokenized_ds = a.map(preprocess_function, batched=True)
 
-        print(f"Renaming labels")
+        #print(f"Renaming labels")
         #tokenized_ds = tokenized_ds.map(lambda x: {"labels": self.tokenizer(x["answers"][0], truncation=True, padding=True)})
-        tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["answers"][0]})
+        #tokenized_ds = tokenized_ds.map(lambda x: {"labels": x["answers"][0]})
 
         print(tokenized_ds[0])
 
